@@ -5,6 +5,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HieloFrost — Iniciar Sesión</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    .role-form { display: none; }
+    .role-form.active { display: block; }
+
+    .whatsapp-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #25D366;
+      color: white;
+      border: none;
+      border-radius: var(--radius-md);
+      padding: 10px 16px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 200ms;
+      width: 100%;
+      justify-content: center;
+    }
+    .whatsapp-btn:hover { background: #1DA851; }
+    .whatsapp-btn.verified {
+      background: var(--color-success);
+      pointer-events: none;
+    }
+
+    .location-input-wrapper {
+      display: flex;
+      gap: 8px;
+    }
+    .location-input-wrapper .form-input { flex: 1; }
+    .location-input-wrapper .btn { white-space: nowrap; flex-shrink: 0; }
+
+    .auth-note {
+      font-size: 0.8rem;
+      color: var(--color-muted);
+      margin-top: 4px;
+    }
+
+    .role-hint {
+      text-align: center;
+      color: var(--color-muted);
+      font-size: 0.9rem;
+      padding: var(--space-lg) 0;
+    }
+  </style>
 </head>
 <body>
   <div class="login-container">
@@ -14,41 +60,129 @@
         <p>Sistema de Preventa</p>
       </div>
 
-      <form id="loginForm" onsubmit="return handleLogin(event)">
+      <!-- Selector de rol -->
+      <div class="form-group">
+        <label class="form-label">Tipo de usuario</label>
+        <select class="form-select" id="userRole" onchange="showRoleForm(this.value)">
+          <option value="" disabled selected>Selecciona tu rol</option>
+          <option value="gerente">Gerente</option>
+          <option value="cliente">Cliente (Tienda)</option>
+          <option value="chofer">Chofer</option>
+        </select>
+      </div>
+
+      <!-- Hint antes de seleccionar -->
+      <div id="roleHint" class="role-hint">
+        Selecciona tu rol para continuar
+      </div>
+
+      <!-- ========== FORMULARIO GERENTE ========== -->
+      <form id="formGerente" class="role-form" onsubmit="return handleLogin(event, 'gerente')">
         <div class="form-group">
-          <label class="form-label">Tipo de usuario</label>
-          <select class="form-select" id="userRole" required>
-            <option value="" disabled selected>Selecciona tu rol</option>
-            <option value="gerente">Gerente</option>
-            <option value="cliente">Cliente (Tienda)</option>
-            <option value="chofer">Chofer</option>
-          </select>
+          <label class="form-label">Correo autorizado</label>
+          <input type="email" class="form-input" placeholder="nombre@empresa.com" required>
+          <p class="auth-note">Solo correos previamente autorizados por el administrador</p>
         </div>
 
         <div class="form-group">
-          <label class="form-label">Usuario o teléfono</label>
-          <input type="text" class="form-input" id="username" placeholder="Ej: juan@frost.com" required>
+          <label class="form-label">Crear contraseña</label>
+          <input type="password" class="form-input" placeholder="Minimo 8 caracteres" required>
         </div>
 
         <div class="form-group">
-          <label class="form-label">Contraseña</label>
-          <input type="password" class="form-input" id="password" placeholder="Tu contraseña" required>
+          <label class="form-label">Confirmar contraseña</label>
+          <input type="password" class="form-input" placeholder="Repite tu contraseña" required>
         </div>
 
         <button type="submit" class="btn btn-primary btn-block btn-lg mt-md">
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
-          Iniciar Sesión
+          Registrar Gerente
         </button>
       </form>
 
-      <p class="text-sm text-muted mt-lg" style="text-align:center;">Demo: selecciona un rol y haz clic en Iniciar Sesión</p>
+      <!-- ========== FORMULARIO CLIENTE (TIENDA) ========== -->
+      <form id="formCliente" class="role-form" onsubmit="return handleLogin(event, 'cliente')">
+        <div class="form-group">
+          <label class="form-label">Nombre de la tienda</label>
+          <input type="text" class="form-input" placeholder="Ej: OXXO Centro, Abarrotes Don Pedro" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Telefono del gerente</label>
+          <input type="tel" class="form-input" placeholder="Ej: 614 123 4567" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Verificacion de WhatsApp</label>
+          <button type="button" class="whatsapp-btn" id="whatsappBtn" onclick="verifyWhatsApp()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.121.553 4.114 1.519 5.845L.525 23.167a.75.75 0 00.908.908l5.322-.994A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75c-1.875 0-3.646-.508-5.167-1.392l-.37-.22-3.155.59.59-3.155-.22-.37A9.723 9.723 0 012.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
+            Enviar codigo por WhatsApp
+          </button>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Ubicacion de la tienda</label>
+          <div class="location-input-wrapper">
+            <input type="text" class="form-input" id="locationInput" placeholder="Direccion o coordenadas" required>
+            <button type="button" class="btn btn-secondary" onclick="getLocation()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/></svg>
+              Ubicar
+            </button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Crear contraseña</label>
+          <input type="password" class="form-input" placeholder="Minimo 8 caracteres" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block btn-lg mt-md">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+          Registrar Tienda
+        </button>
+      </form>
+
+      <!-- ========== FORMULARIO CHOFER ========== -->
+      <form id="formChofer" class="role-form" onsubmit="return handleLogin(event, 'chofer')">
+        <div class="form-group">
+          <label class="form-label">Nombre del chofer</label>
+          <input type="text" class="form-input" placeholder="Nombre completo" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Numero de telefono</label>
+          <input type="tel" class="form-input" placeholder="Ej: 614 987 6543" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Contraseña</label>
+          <input type="password" class="form-input" placeholder="Tu contraseña" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block btn-lg mt-md">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+          Iniciar Sesion
+        </button>
+      </form>
+
     </div>
   </div>
 
   <script>
-    function handleLogin(e) {
+    function showRoleForm(role) {
+      // Ocultar todos los formularios y el hint
+      document.querySelectorAll('.role-form').forEach(f => f.classList.remove('active'));
+      document.getElementById('roleHint').style.display = 'none';
+
+      // Mostrar el formulario del rol seleccionado
+      const formMap = { gerente: 'formGerente', cliente: 'formCliente', chofer: 'formChofer' };
+      if (formMap[role]) {
+        document.getElementById(formMap[role]).classList.add('active');
+      }
+    }
+
+    function handleLogin(e, role) {
       e.preventDefault();
-      const role = document.getElementById('userRole').value;
       const routes = {
         gerente: 'gerente-dashboard.html',
         cliente: 'cliente-home.html',
@@ -58,6 +192,21 @@
         window.location.href = routes[role];
       }
       return false;
+    }
+
+    function verifyWhatsApp() {
+      const btn = document.getElementById('whatsappBtn');
+      btn.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        WhatsApp verificado
+      `;
+      btn.classList.add('verified');
+    }
+
+    function getLocation() {
+      const input = document.getElementById('locationInput');
+      input.value = 'Av. Tecnologico #1234, Col. Centro';
+      input.style.borderColor = 'var(--color-success)';
     }
   </script>
 </body>

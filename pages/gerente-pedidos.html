@@ -5,6 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HieloFrost — Pedidos</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    .badge-priority-empty { background: rgba(220, 38, 38, 0.1); color: #DC2626; font-weight: 600; }
+    .badge-priority-half-empty { background: rgba(249, 115, 22, 0.1); color: #F97316; font-weight: 600; }
+    .badge-priority-half-full { background: rgba(245, 158, 11, 0.1); color: #F59E0B; font-weight: 600; }
+    .badge-priority-full { background: rgba(22, 163, 74, 0.1); color: #16A34A; font-weight: 600; }
+
+    .priority-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 6px;
+    }
+    .priority-dot.empty { background: #DC2626; }
+    .priority-dot.half-empty { background: #F97316; }
+    .priority-dot.half-full { background: #F59E0B; }
+    .priority-dot.full { background: #16A34A; }
+  </style>
 </head>
 <body>
   <div class="layout-sidebar">
@@ -55,13 +73,23 @@
         <h1>Gestión de Pedidos</h1>
       </div>
 
-      <!-- Filters -->
+      <!-- Filters: Estado -->
       <div class="filters-bar">
         <button class="filter-chip active" onclick="filterOrders('all', this)">Todos (18)</button>
         <button class="filter-chip" onclick="filterOrders('pending', this)">Pendientes (5)</button>
         <button class="filter-chip" onclick="filterOrders('approved', this)">Aprobados (3)</button>
         <button class="filter-chip" onclick="filterOrders('route', this)">En Ruta (5)</button>
         <button class="filter-chip" onclick="filterOrders('delivered', this)">Entregados (5)</button>
+      </div>
+
+      <!-- Filters: Prioridad -->
+      <div class="filters-bar" style="margin-top:var(--space-sm);">
+        <span class="text-sm text-muted" style="display:flex;align-items:center;margin-right:var(--space-sm);">Prioridad:</span>
+        <button class="filter-chip" onclick="filterPriority('all', this)" style="font-size:0.8rem;">Todas</button>
+        <button class="filter-chip" onclick="filterPriority('empty', this)" style="font-size:0.8rem;"><span class="priority-dot empty"></span>Vacio total</button>
+        <button class="filter-chip" onclick="filterPriority('half-empty', this)" style="font-size:0.8rem;"><span class="priority-dot half-empty"></span>Medio vacio</button>
+        <button class="filter-chip" onclick="filterPriority('half-full', this)" style="font-size:0.8rem;"><span class="priority-dot half-full"></span>Medio lleno</button>
+        <button class="filter-chip" onclick="filterPriority('full', this)" style="font-size:0.8rem;"><span class="priority-dot full"></span>Lleno</button>
       </div>
 
       <!-- Table -->
@@ -73,6 +101,7 @@
                 <th>Pedido</th>
                 <th>Tienda</th>
                 <th>Tipo</th>
+                <th>Prioridad</th>
                 <th>Cantidad</th>
                 <th>Fecha Pedido</th>
                 <th>Fecha Entrega</th>
@@ -82,10 +111,11 @@
               </tr>
             </thead>
             <tbody id="ordersTable">
-              <tr data-status="pending">
+              <tr data-status="pending" data-priority="empty">
                 <td class="font-mono">#PV-0042</td>
                 <td>OXXO Centro</td>
                 <td class="text-sm">Conveniencia</td>
+                <td><span class="badge badge-priority-empty"><span class="priority-dot empty"></span>Vacio total</span></td>
                 <td>20 bolsas</td>
                 <td>25 Mar</td>
                 <td>26 Mar</td>
@@ -98,10 +128,11 @@
                   </div>
                 </td>
               </tr>
-              <tr data-status="pending">
+              <tr data-status="pending" data-priority="half-empty">
                 <td class="font-mono">#PV-0041</td>
                 <td>7-Eleven Reforma</td>
                 <td class="text-sm">Conveniencia</td>
+                <td><span class="badge badge-priority-half-empty"><span class="priority-dot half-empty"></span>Medio vacio</span></td>
                 <td>15 bolsas</td>
                 <td>25 Mar</td>
                 <td>26 Mar</td>
@@ -114,10 +145,11 @@
                   </div>
                 </td>
               </tr>
-              <tr data-status="pending">
+              <tr data-status="pending" data-priority="empty">
                 <td class="font-mono">#PV-0040</td>
                 <td>Soriana Norte</td>
                 <td class="text-sm">Autoservicio</td>
+                <td><span class="badge badge-priority-empty"><span class="priority-dot empty"></span>Vacio total</span></td>
                 <td>30 bolsas</td>
                 <td>25 Mar</td>
                 <td>26 Mar</td>
@@ -130,10 +162,11 @@
                   </div>
                 </td>
               </tr>
-              <tr data-status="pending">
+              <tr data-status="pending" data-priority="half-full">
                 <td class="font-mono">#PV-0039</td>
                 <td>OXXO Poniente</td>
                 <td class="text-sm">Conveniencia</td>
+                <td><span class="badge badge-priority-half-full"><span class="priority-dot half-full"></span>Medio lleno</span></td>
                 <td>10 bolsas</td>
                 <td>24 Mar</td>
                 <td>27 Mar</td>
@@ -146,10 +179,11 @@
                   </div>
                 </td>
               </tr>
-              <tr data-status="pending">
+              <tr data-status="pending" data-priority="empty">
                 <td class="font-mono">#PV-0038</td>
                 <td>Extra Sur</td>
                 <td class="text-sm">Autoservicio</td>
+                <td><span class="badge badge-priority-empty"><span class="priority-dot empty"></span>Vacio total</span></td>
                 <td>12 bolsas</td>
                 <td>24 Mar</td>
                 <td>27 Mar</td>
@@ -162,10 +196,11 @@
                   </div>
                 </td>
               </tr>
-              <tr data-status="approved">
+              <tr data-status="approved" data-priority="half-empty">
                 <td class="font-mono">#PV-0037</td>
                 <td>Modelorama Valle</td>
                 <td class="text-sm">Conveniencia</td>
+                <td><span class="badge badge-priority-half-empty"><span class="priority-dot half-empty"></span>Medio vacio</span></td>
                 <td>8 bolsas</td>
                 <td>24 Mar</td>
                 <td>25 Mar</td>
@@ -173,10 +208,11 @@
                 <td><span class="badge badge-approved">Aprobado</span></td>
                 <td><span class="text-sm text-muted">Listo para ruta</span></td>
               </tr>
-              <tr data-status="approved">
+              <tr data-status="approved" data-priority="empty">
                 <td class="font-mono">#PV-0036</td>
                 <td>Abarrotes El Sol</td>
                 <td class="text-sm">Conveniencia</td>
+                <td><span class="badge badge-priority-empty"><span class="priority-dot empty"></span>Vacio total</span></td>
                 <td>5 bolsas</td>
                 <td>24 Mar</td>
                 <td>25 Mar</td>
@@ -184,10 +220,11 @@
                 <td><span class="badge badge-approved">Aprobado</span></td>
                 <td><span class="text-sm text-muted">Listo para ruta</span></td>
               </tr>
-              <tr data-status="approved">
+              <tr data-status="approved" data-priority="half-full">
                 <td class="font-mono">#PV-0035</td>
                 <td>Super Kiosko</td>
                 <td class="text-sm">Conveniencia</td>
+                <td><span class="badge badge-priority-half-full"><span class="priority-dot half-full"></span>Medio lleno</span></td>
                 <td>10 bolsas</td>
                 <td>23 Mar</td>
                 <td>25 Mar</td>
@@ -195,10 +232,11 @@
                 <td><span class="badge badge-approved">Aprobado</span></td>
                 <td><span class="text-sm text-muted">Listo para ruta</span></td>
               </tr>
-              <tr data-status="route">
+              <tr data-status="route" data-priority="empty">
                 <td class="font-mono">#PV-0034</td>
                 <td>OXXO Juárez</td>
                 <td class="text-sm">Conveniencia</td>
+                <td><span class="badge badge-priority-empty"><span class="priority-dot empty"></span>Vacio total</span></td>
                 <td>25 bolsas</td>
                 <td>23 Mar</td>
                 <td>25 Mar</td>
@@ -206,10 +244,11 @@
                 <td><span class="badge badge-route">En Ruta</span></td>
                 <td><span class="text-sm text-muted">Zona Centro</span></td>
               </tr>
-              <tr data-status="route">
+              <tr data-status="route" data-priority="half-empty">
                 <td class="font-mono">#PV-0033</td>
                 <td>Modelorama Centro</td>
                 <td class="text-sm">Conveniencia</td>
+                <td><span class="badge badge-priority-half-empty"><span class="priority-dot half-empty"></span>Medio vacio</span></td>
                 <td>15 bolsas</td>
                 <td>23 Mar</td>
                 <td>25 Mar</td>
@@ -217,10 +256,11 @@
                 <td><span class="badge badge-route">En Ruta</span></td>
                 <td><span class="text-sm text-muted">Zona Centro</span></td>
               </tr>
-              <tr data-status="route">
+              <tr data-status="route" data-priority="half-empty">
                 <td class="font-mono">#PV-0032</td>
                 <td>Extra Hidalgo</td>
                 <td class="text-sm">Autoservicio</td>
+                <td><span class="badge badge-priority-half-empty"><span class="priority-dot half-empty"></span>Medio vacio</span></td>
                 <td>20 bolsas</td>
                 <td>23 Mar</td>
                 <td>25 Mar</td>
@@ -228,10 +268,11 @@
                 <td><span class="badge badge-route">En Ruta</span></td>
                 <td><span class="text-sm text-muted">Zona Centro</span></td>
               </tr>
-              <tr data-status="route">
+              <tr data-status="route" data-priority="half-full">
                 <td class="font-mono">#PV-0031</td>
                 <td>Soriana Norte</td>
                 <td class="text-sm">Autoservicio</td>
+                <td><span class="badge badge-priority-half-full"><span class="priority-dot half-full"></span>Medio lleno</span></td>
                 <td>30 bolsas</td>
                 <td>22 Mar</td>
                 <td>25 Mar</td>
@@ -239,10 +280,11 @@
                 <td><span class="badge badge-route">En Ruta</span></td>
                 <td><span class="text-sm text-muted">Zona Norte</span></td>
               </tr>
-              <tr data-status="route">
+              <tr data-status="route" data-priority="full">
                 <td class="font-mono">#PV-0030</td>
                 <td>OXXO Industrial</td>
                 <td class="text-sm">Conveniencia</td>
+                <td><span class="badge badge-priority-full"><span class="priority-dot full"></span>Lleno</span></td>
                 <td>18 bolsas</td>
                 <td>22 Mar</td>
                 <td>25 Mar</td>
@@ -250,10 +292,11 @@
                 <td><span class="badge badge-route">En Ruta</span></td>
                 <td><span class="text-sm text-muted">Zona Norte</span></td>
               </tr>
-              <tr data-status="delivered">
+              <tr data-status="delivered" data-priority="full">
                 <td class="font-mono">#PV-0029</td>
                 <td>7-Eleven Centro</td>
                 <td class="text-sm">Conveniencia</td>
+                <td><span class="badge badge-priority-full"><span class="priority-dot full"></span>Lleno</span></td>
                 <td>20 bolsas</td>
                 <td>22 Mar</td>
                 <td>25 Mar</td>
@@ -261,10 +304,11 @@
                 <td><span class="badge badge-delivered">Entregado</span></td>
                 <td><span class="text-sm text-success">Completado</span></td>
               </tr>
-              <tr data-status="delivered">
+              <tr data-status="delivered" data-priority="full">
                 <td class="font-mono">#PV-0028</td>
                 <td>OXXO Norte</td>
                 <td class="text-sm">Conveniencia</td>
+                <td><span class="badge badge-priority-full"><span class="priority-dot full"></span>Lleno</span></td>
                 <td>15 bolsas</td>
                 <td>21 Mar</td>
                 <td>24 Mar</td>
@@ -320,11 +364,23 @@
       });
     }
 
+    function filterPriority(priority, chip) {
+      chip.parentElement.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      document.querySelectorAll('#ordersTable tr').forEach(row => {
+        if (priority === 'all' || row.dataset.priority === priority) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    }
+
     function openAssignModal(btn) {
       currentRow = btn.closest('tr');
       const cells = currentRow.querySelectorAll('td');
       document.getElementById('modalInfo').textContent =
-        `${cells[0].textContent} — ${cells[1].textContent} — ${cells[3].textContent}`;
+        `${cells[0].textContent} — ${cells[1].textContent} — ${cells[4].textContent}`;
       document.getElementById('assignModal').classList.add('active');
     }
 
@@ -338,7 +394,7 @@
         currentRow.dataset.status = 'approved';
         currentRow.querySelector('.badge').className = 'badge badge-approved';
         currentRow.querySelector('.badge').textContent = 'Aprobado';
-        currentRow.querySelectorAll('td')[6].textContent = 'Carlos Ruiz';
+        currentRow.querySelectorAll('td')[7].textContent = 'Carlos Ruiz';
         currentRow.querySelector('td:last-child').innerHTML = '<span class="text-sm text-muted">Listo para ruta</span>';
       }
       closeModal();
