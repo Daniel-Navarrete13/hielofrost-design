@@ -4,7 +4,8 @@
   "description": "HieloFrost Design System - Preview local con hot-reload",
   "scripts": {
     "start": "live-server pages/ --port=8080 --open=/index.html",
-    "preview": "live-server pages/ --port=8080 --no-browser"
+    "preview": "live-server pages/ --port=8080 --no-browser",
+    "deploy": "git add -A && git commit -m 'update design system' && git push"
   },
   "devDependencies": {
     "live-server": "^1.2.2"
