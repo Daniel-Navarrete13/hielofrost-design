@@ -22,6 +22,59 @@
     .priority-dot.half-empty { background: #F97316; }
     .priority-dot.half-full { background: #F59E0B; }
     .priority-dot.full { background: #16A34A; }
+
+    /* Editable quantity */
+    .qty-cell {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      padding: 2px 6px;
+      border-radius: var(--radius-sm);
+      transition: background 150ms;
+    }
+    .qty-cell:hover { background: var(--color-surface-alt); }
+    .qty-cell .qty-edit-icon {
+      opacity: 0;
+      transition: opacity 150ms;
+      color: var(--color-muted);
+    }
+    .qty-cell:hover .qty-edit-icon { opacity: 1; }
+
+    .qty-editor {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .qty-editor input {
+      width: 60px;
+      padding: 4px 8px;
+      border: 1px solid var(--color-cta);
+      border-radius: var(--radius-sm);
+      font-family: 'Fira Code', monospace;
+      font-size: 0.85rem;
+      text-align: center;
+      outline: none;
+    }
+    .qty-editor .qty-btn {
+      width: 26px;
+      height: 26px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      background: var(--color-surface);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      color: var(--color-secondary);
+      transition: all 150ms;
+    }
+    .qty-editor .qty-btn:hover {
+      background: var(--color-cta);
+      color: white;
+      border-color: var(--color-cta);
+    }
   </style>
 </head>
 <body>
@@ -116,7 +169,7 @@
                 <td>OXXO Centro</td>
                 <td class="text-sm">Conveniencia</td>
                 <td><span class="badge badge-priority-empty"><span class="priority-dot empty"></span>Vacio total</span></td>
-                <td>20 bolsas</td>
+                <td><span class="qty-cell" onclick="editQty(this, 20)">20 bolsas <svg class="qty-edit-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg></span></td>
                 <td>25 Mar</td>
                 <td>26 Mar</td>
                 <td class="text-muted">Sin asignar</td>
@@ -133,7 +186,7 @@
                 <td>7-Eleven Reforma</td>
                 <td class="text-sm">Conveniencia</td>
                 <td><span class="badge badge-priority-half-empty"><span class="priority-dot half-empty"></span>Medio vacio</span></td>
-                <td>15 bolsas</td>
+                <td><span class="qty-cell" onclick="editQty(this, 15)">15 bolsas <svg class="qty-edit-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg></span></td>
                 <td>25 Mar</td>
                 <td>26 Mar</td>
                 <td class="text-muted">Sin asignar</td>
@@ -150,7 +203,7 @@
                 <td>Soriana Norte</td>
                 <td class="text-sm">Autoservicio</td>
                 <td><span class="badge badge-priority-empty"><span class="priority-dot empty"></span>Vacio total</span></td>
-                <td>30 bolsas</td>
+                <td><span class="qty-cell" onclick="editQty(this, 30)">30 bolsas <svg class="qty-edit-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg></span></td>
                 <td>25 Mar</td>
                 <td>26 Mar</td>
                 <td class="text-muted">Sin asignar</td>
@@ -167,7 +220,7 @@
                 <td>OXXO Poniente</td>
                 <td class="text-sm">Conveniencia</td>
                 <td><span class="badge badge-priority-half-full"><span class="priority-dot half-full"></span>Medio lleno</span></td>
-                <td>10 bolsas</td>
+                <td><span class="qty-cell" onclick="editQty(this, 10)">10 bolsas <svg class="qty-edit-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg></span></td>
                 <td>24 Mar</td>
                 <td>27 Mar</td>
                 <td class="text-muted">Sin asignar</td>
@@ -184,7 +237,7 @@
                 <td>Extra Sur</td>
                 <td class="text-sm">Autoservicio</td>
                 <td><span class="badge badge-priority-empty"><span class="priority-dot empty"></span>Vacio total</span></td>
-                <td>12 bolsas</td>
+                <td><span class="qty-cell" onclick="editQty(this, 12)">12 bolsas <svg class="qty-edit-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg></span></td>
                 <td>24 Mar</td>
                 <td>27 Mar</td>
                 <td class="text-muted">Sin asignar</td>
@@ -201,7 +254,7 @@
                 <td>Modelorama Valle</td>
                 <td class="text-sm">Conveniencia</td>
                 <td><span class="badge badge-priority-half-empty"><span class="priority-dot half-empty"></span>Medio vacio</span></td>
-                <td>8 bolsas</td>
+                <td><span class="qty-cell" onclick="editQty(this, 8)">8 bolsas <svg class="qty-edit-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg></span></td>
                 <td>24 Mar</td>
                 <td>25 Mar</td>
                 <td>Carlos Ruiz</td>
@@ -213,7 +266,7 @@
                 <td>Abarrotes El Sol</td>
                 <td class="text-sm">Conveniencia</td>
                 <td><span class="badge badge-priority-empty"><span class="priority-dot empty"></span>Vacio total</span></td>
-                <td>5 bolsas</td>
+                <td><span class="qty-cell" onclick="editQty(this, 5)">5 bolsas <svg class="qty-edit-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg></span></td>
                 <td>24 Mar</td>
                 <td>25 Mar</td>
                 <td>Carlos Ruiz</td>
@@ -225,7 +278,7 @@
                 <td>Super Kiosko</td>
                 <td class="text-sm">Conveniencia</td>
                 <td><span class="badge badge-priority-half-full"><span class="priority-dot half-full"></span>Medio lleno</span></td>
-                <td>10 bolsas</td>
+                <td><span class="qty-cell" onclick="editQty(this, 10)">10 bolsas <svg class="qty-edit-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg></span></td>
                 <td>23 Mar</td>
                 <td>25 Mar</td>
                 <td>Juan Pérez</td>
@@ -237,7 +290,7 @@
                 <td>OXXO Juárez</td>
                 <td class="text-sm">Conveniencia</td>
                 <td><span class="badge badge-priority-empty"><span class="priority-dot empty"></span>Vacio total</span></td>
-                <td>25 bolsas</td>
+                <td><span class="qty-cell" onclick="editQty(this, 25)">25 bolsas <svg class="qty-edit-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg></span></td>
                 <td>23 Mar</td>
                 <td>25 Mar</td>
                 <td>Juan Pérez</td>
@@ -249,7 +302,7 @@
                 <td>Modelorama Centro</td>
                 <td class="text-sm">Conveniencia</td>
                 <td><span class="badge badge-priority-half-empty"><span class="priority-dot half-empty"></span>Medio vacio</span></td>
-                <td>15 bolsas</td>
+                <td><span class="qty-cell" onclick="editQty(this, 15)">15 bolsas <svg class="qty-edit-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg></span></td>
                 <td>23 Mar</td>
                 <td>25 Mar</td>
                 <td>Juan Pérez</td>
@@ -261,7 +314,7 @@
                 <td>Extra Hidalgo</td>
                 <td class="text-sm">Autoservicio</td>
                 <td><span class="badge badge-priority-half-empty"><span class="priority-dot half-empty"></span>Medio vacio</span></td>
-                <td>20 bolsas</td>
+                <td><span class="qty-cell" onclick="editQty(this, 20)">20 bolsas <svg class="qty-edit-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg></span></td>
                 <td>23 Mar</td>
                 <td>25 Mar</td>
                 <td>Juan Pérez</td>
@@ -273,7 +326,7 @@
                 <td>Soriana Norte</td>
                 <td class="text-sm">Autoservicio</td>
                 <td><span class="badge badge-priority-half-full"><span class="priority-dot half-full"></span>Medio lleno</span></td>
-                <td>30 bolsas</td>
+                <td><span class="qty-cell" onclick="editQty(this, 30)">30 bolsas <svg class="qty-edit-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg></span></td>
                 <td>22 Mar</td>
                 <td>25 Mar</td>
                 <td>Miguel López</td>
@@ -285,7 +338,7 @@
                 <td>OXXO Industrial</td>
                 <td class="text-sm">Conveniencia</td>
                 <td><span class="badge badge-priority-full"><span class="priority-dot full"></span>Lleno</span></td>
-                <td>18 bolsas</td>
+                <td><span class="qty-cell" onclick="editQty(this, 18)">18 bolsas <svg class="qty-edit-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg></span></td>
                 <td>22 Mar</td>
                 <td>25 Mar</td>
                 <td>Miguel López</td>
@@ -297,7 +350,7 @@
                 <td>7-Eleven Centro</td>
                 <td class="text-sm">Conveniencia</td>
                 <td><span class="badge badge-priority-full"><span class="priority-dot full"></span>Lleno</span></td>
-                <td>20 bolsas</td>
+                <td><span class="qty-cell" onclick="editQty(this, 20)">20 bolsas <svg class="qty-edit-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg></span></td>
                 <td>22 Mar</td>
                 <td>25 Mar</td>
                 <td>Juan Pérez</td>
@@ -309,7 +362,7 @@
                 <td>OXXO Norte</td>
                 <td class="text-sm">Conveniencia</td>
                 <td><span class="badge badge-priority-full"><span class="priority-dot full"></span>Lleno</span></td>
-                <td>15 bolsas</td>
+                <td><span class="qty-cell" onclick="editQty(this, 15)">15 bolsas <svg class="qty-edit-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg></span></td>
                 <td>21 Mar</td>
                 <td>24 Mar</td>
                 <td>Miguel López</td>
@@ -355,6 +408,42 @@
 
   <script>
     let currentRow = null;
+
+    function editQty(span, currentVal) {
+      const td = span.parentElement;
+      const editor = document.createElement('div');
+      editor.className = 'qty-editor';
+      editor.innerHTML = `
+        <button class="qty-btn" onclick="changeQty(this, -5)">-</button>
+        <input type="number" value="${currentVal}" min="1" step="5">
+        <button class="qty-btn" onclick="changeQty(this, 5)">+</button>
+      `;
+      td.innerHTML = '';
+      td.appendChild(editor);
+      const input = editor.querySelector('input');
+      input.focus();
+      input.select();
+
+      function saveQty() {
+        const val = parseInt(input.value) || currentVal;
+        td.innerHTML = `<span class="qty-cell" onclick="editQty(this, ${val})">${val} bolsas <svg class="qty-edit-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg></span>`;
+      }
+
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') saveQty();
+        if (e.key === 'Escape') {
+          td.innerHTML = `<span class="qty-cell" onclick="editQty(this, ${currentVal})">${currentVal} bolsas <svg class="qty-edit-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg></span>`;
+        }
+      });
+      input.addEventListener('blur', () => setTimeout(saveQty, 150));
+    }
+
+    function changeQty(btn, delta) {
+      const input = btn.parentElement.querySelector('input');
+      const newVal = Math.max(1, parseInt(input.value) + delta);
+      input.value = newVal;
+      input.focus();
+    }
 
     function filterOrders(status, chip) {
       document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));

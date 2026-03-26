@@ -8,144 +8,149 @@
   <style>
     body { background: var(--color-background); }
 
-    /* Upload area */
-    .upload-area {
-      border: 2px dashed var(--color-border);
-      border-radius: var(--radius-lg);
-      padding: var(--space-2xl) var(--space-lg);
-      text-align: center;
-      cursor: pointer;
-      transition: all 200ms;
+    /* Conservador card */
+    .conservador-card {
       background: var(--color-surface);
-    }
-    .upload-area:hover {
-      border-color: var(--color-cta);
-      background: rgba(3, 105, 161, 0.03);
-    }
-    .upload-area.has-photo {
-      border-color: var(--color-success);
-      border-style: solid;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
       padding: var(--space-md);
-    }
-    .upload-icon {
-      width: 56px;
-      height: 56px;
-      background: var(--color-surface-alt);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto var(--space-md);
-    }
-    .upload-area h3 {
-      font-family: 'Fira Code', monospace;
-      font-size: 0.95rem;
-      color: var(--color-primary);
-      margin-bottom: var(--space-xs);
-    }
-    .upload-area p {
-      font-size: 0.8rem;
-      color: var(--color-muted);
-    }
-
-    /* Photo preview */
-    .photo-preview {
-      width: 100%;
-      height: 200px;
-      background: var(--color-surface-alt);
-      border-radius: var(--radius-md);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--color-muted);
-      font-size: 0.85rem;
       margin-bottom: var(--space-md);
-      position: relative;
-      overflow: hidden;
+      transition: border-color 200ms;
     }
-    .photo-preview svg {
-      opacity: 0.3;
+    .conservador-card.reviewed {
+      border-color: var(--color-success);
+    }
+    .conservador-card.maintenance {
+      opacity: 0.5;
+      pointer-events: none;
     }
 
-    /* AI Result */
-    .ai-result {
-      display: none;
-      margin-top: var(--space-md);
-    }
-    .ai-result.active { display: block; }
-
-    .ai-header {
+    .conservador-header {
       display: flex;
+      justify-content: space-between;
       align-items: center;
+      margin-bottom: var(--space-sm);
+    }
+    .conservador-header h4 {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.85rem;
+      color: var(--color-primary);
+    }
+    .conservador-meta {
+      display: flex;
       gap: var(--space-sm);
       margin-bottom: var(--space-md);
     }
-    .ai-header .ai-icon {
-      width: 32px;
-      height: 32px;
+    .conservador-meta span {
+      font-size: 0.75rem;
+      color: var(--color-muted);
+      background: var(--color-surface-alt);
+      padding: 2px 8px;
+      border-radius: var(--radius-sm);
+    }
+
+    /* Upload mini */
+    .upload-mini {
+      border: 2px dashed var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      text-align: center;
+      cursor: pointer;
+      transition: all 200ms;
+    }
+    .upload-mini:hover {
+      border-color: var(--color-cta);
+      background: rgba(3, 105, 161, 0.03);
+    }
+    .upload-mini.has-photo {
+      border-color: var(--color-success);
+      border-style: solid;
+      padding: var(--space-sm);
+    }
+    .upload-mini p {
+      font-size: 0.8rem;
+      color: var(--color-muted);
+      margin-top: var(--space-xs);
+    }
+
+    /* Photo placeholder */
+    .photo-placeholder {
+      width: 100%;
+      height: 120px;
       background: var(--color-surface-alt);
       border-radius: var(--radius-sm);
       display: flex;
       align-items: center;
       justify-content: center;
     }
-    .ai-header span {
-      font-size: 0.8rem;
-      color: var(--color-muted);
+
+    /* AI Result mini */
+    .ai-result-mini {
+      display: none;
+      margin-top: var(--space-sm);
+    }
+    .ai-result-mini.active { display: block; }
+
+    .level-bar-mini {
+      height: 8px;
+      background: var(--color-surface-alt);
+      border-radius: 4px;
+      overflow: hidden;
+      margin: var(--space-xs) 0;
+    }
+    .level-bar-mini-fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 600ms ease;
     }
 
-    /* Level bar */
-    .level-bar-container {
+    .ai-result-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Priority badges */
+    .badge-priority-empty { background: rgba(220, 38, 38, 0.1); color: #DC2626; font-weight: 600; }
+    .badge-priority-half-empty { background: rgba(249, 115, 22, 0.1); color: #F97316; font-weight: 600; }
+    .badge-priority-half-full { background: rgba(245, 158, 11, 0.1); color: #F59E0B; font-weight: 600; }
+    .badge-priority-full { background: rgba(22, 163, 74, 0.1); color: #16A34A; font-weight: 600; }
+
+    /* Summary */
+    .review-summary {
+      display: none;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-md);
       margin-bottom: var(--space-md);
     }
-    .level-bar-labels {
+    .review-summary.active { display: block; }
+    .summary-row {
       display: flex;
       justify-content: space-between;
-      font-size: 0.7rem;
-      color: var(--color-muted);
-      margin-bottom: 6px;
+      padding: var(--space-xs) 0;
+      font-size: 0.85rem;
     }
-    .level-bar {
-      height: 12px;
-      background: var(--color-surface-alt);
-      border-radius: 6px;
-      overflow: hidden;
-      position: relative;
+    .summary-row + .summary-row {
+      border-top: 1px solid var(--color-border);
     }
-    .level-bar-fill {
-      height: 100%;
-      border-radius: 6px;
-      transition: width 600ms ease, background 400ms ease;
-    }
-    .level-bar-fill.level-empty { width: 10%; background: var(--color-danger); }
-    .level-bar-fill.level-half-empty { width: 35%; background: #F97316; }
-    .level-bar-fill.level-half-full { width: 65%; background: var(--color-warning); }
-    .level-bar-fill.level-full { width: 95%; background: var(--color-success); }
 
-    /* Priority badge large */
-    .priority-result {
+    /* Capacity bar */
+    .capacity-info {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      padding: var(--space-md);
+      align-items: center;
+      padding: var(--space-sm) var(--space-md);
       background: var(--color-surface-alt);
       border-radius: var(--radius-md);
       margin-bottom: var(--space-md);
     }
-    .priority-result .priority-label {
+    .capacity-info .total {
       font-family: 'Fira Code', monospace;
-      font-size: 1.1rem;
       font-weight: 600;
+      font-size: 0.9rem;
     }
-    .priority-result .priority-label.text-danger { color: var(--color-danger); }
-    .priority-result .priority-label.text-warning { color: var(--color-warning); }
-    .priority-result .priority-label.text-orange { color: #F97316; }
-    .priority-result .priority-label.text-success { color: var(--color-success); }
-
-    .badge-priority-empty { background: rgba(220, 38, 38, 0.1); color: var(--color-danger); font-weight: 600; }
-    .badge-priority-half-empty { background: rgba(249, 115, 22, 0.1); color: #F97316; font-weight: 600; }
-    .badge-priority-half-full { background: rgba(245, 158, 11, 0.1); color: var(--color-warning); font-weight: 600; }
-    .badge-priority-full { background: rgba(22, 163, 74, 0.1); color: var(--color-success); font-weight: 600; }
   </style>
 </head>
 <body>
@@ -159,70 +164,81 @@
     <!-- Body -->
     <div class="mobile-body">
 
-      <!-- Revisar Refrigerador -->
-      <div class="card mb-md">
-        <h3 class="mb-sm" style="font-family:'Fira Code',monospace;font-size:0.95rem;">Revisar Refrigerador</h3>
+      <!-- Capacity overview -->
+      <div class="capacity-info">
+        <span class="text-sm text-muted">Capacidad total</span>
+        <span class="total">310 bolsas</span>
+      </div>
 
-        <!-- Upload area -->
-        <div class="upload-area" id="uploadArea" onclick="simulatePhoto()">
-          <div id="uploadPlaceholder">
-            <div class="upload-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--color-cta)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-            </div>
-            <h3>Toma una foto de tu refrigerador</h3>
-            <p>La IA detectara el nivel de hielo y creara el pedido automaticamente</p>
-          </div>
+      <!-- Section header -->
+      <div class="flex justify-between items-center mb-sm">
+        <h3>Revisar Conservadores (3)</h3>
+        <span class="text-sm text-muted" id="reviewCount">0/3 revisados</span>
+      </div>
 
-          <!-- Photo preview (simulado) -->
-          <div class="photo-preview" id="photoPreview" style="display:none;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--color-muted)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M7 2v20"/><path d="M17 2v20"/><path d="M2 7h20"/><path d="M2 12h20"/><path d="M2 17h20"/></svg>
-          </div>
+      <!-- Conservador 1 — C150 -->
+      <div class="conservador-card" id="cons1">
+        <div class="conservador-header">
+          <h4>Conservador #1</h4>
+          <span class="badge badge-active">Operando</span>
         </div>
+        <div class="conservador-meta">
+          <span>C150</span>
+          <span>150 bolsas</span>
+        </div>
+        <div class="upload-mini" id="upload1" onclick="simulatePhoto(1, 'half-empty', 'Medio vacio', 'Alta')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-cta)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <p>Tomar foto</p>
+        </div>
+        <div class="ai-result-mini" id="result1"></div>
+      </div>
 
-        <!-- AI Result -->
-        <div class="ai-result" id="aiResult">
-          <div class="ai-header">
-            <div class="ai-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-cta)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 1 4 4v1a3 3 0 0 1 3 3v1a2 2 0 0 1-2 2h-1v4a4 4 0 0 1-8 0v-4H7a2 2 0 0 1-2-2v-1a3 3 0 0 1 3-3V6a4 4 0 0 1 4-4z"/></svg>
-            </div>
-            <div>
-              <strong class="text-sm">Analisis de IA</strong>
-              <span> — resultado</span>
-            </div>
-          </div>
+      <!-- Conservador 2 — C100 -->
+      <div class="conservador-card" id="cons2">
+        <div class="conservador-header">
+          <h4>Conservador #2</h4>
+          <span class="badge badge-active">Operando</span>
+        </div>
+        <div class="conservador-meta">
+          <span>C100</span>
+          <span>100 bolsas</span>
+        </div>
+        <div class="upload-mini" id="upload2" onclick="simulatePhoto(2, 'empty', 'Vacio total', 'Urgente')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-cta)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <p>Tomar foto</p>
+        </div>
+        <div class="ai-result-mini" id="result2"></div>
+      </div>
 
-          <!-- Level bar -->
-          <div class="level-bar-container">
-            <div class="level-bar-labels">
-              <span>Vacio</span>
-              <span>Medio vacio</span>
-              <span>Medio lleno</span>
-              <span>Lleno</span>
-            </div>
-            <div class="level-bar">
-              <div class="level-bar-fill level-half-empty" id="levelBar"></div>
-            </div>
-          </div>
-
-          <!-- Priority result -->
-          <div class="priority-result">
-            <div>
-              <p class="text-sm text-muted">Nivel detectado</p>
-              <p class="priority-label text-orange" id="priorityLabel">Medio vacio</p>
-            </div>
-            <span class="badge badge-priority-half-empty" id="priorityBadge">Prioridad Alta</span>
-          </div>
-
-          <!-- Send button -->
-          <button class="btn btn-primary btn-block btn-lg" onclick="sendReview()">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-            Enviar revision al gerente
-          </button>
+      <!-- Conservador 3 — C60 (Mantenimiento) -->
+      <div class="conservador-card maintenance" id="cons3">
+        <div class="conservador-header">
+          <h4>Conservador #3</h4>
+          <span class="badge badge-inactive">Mantenimiento</span>
+        </div>
+        <div class="conservador-meta">
+          <span>C60</span>
+          <span>60 bolsas</span>
+        </div>
+        <div style="text-align:center;padding:var(--space-sm);color:var(--color-muted);font-size:0.8rem;">
+          En mantenimiento — no requiere revision
         </div>
       </div>
 
+      <!-- Review summary -->
+      <div class="review-summary" id="reviewSummary">
+        <h4 style="font-family:'Fira Code',monospace;font-size:0.85rem;margin-bottom:var(--space-sm);">Resumen de revision</h4>
+        <div id="summaryRows"></div>
+      </div>
+
+      <!-- Send button -->
+      <button class="btn btn-primary btn-block btn-lg" id="sendBtn" onclick="sendReview()" style="display:none;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        Enviar revision completa
+      </button>
+
       <!-- Active Orders -->
-      <h3 class="mb-sm">Pedidos Activos</h3>
+      <h3 class="mb-sm mt-lg">Pedidos Activos</h3>
 
       <div class="card mb-sm" style="border-left:3px solid var(--color-cta);">
         <div class="flex justify-between items-center mb-xs">
@@ -254,21 +270,17 @@
         </div>
         <div style="flex:1;">
           <strong class="text-sm">Mi Tienda</strong>
-          <p class="text-sm text-muted">3 refrigeradores asignados</p>
+          <p class="text-sm text-muted">3 conservadores asignados</p>
         </div>
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
     </div>
 
-    <!-- Bottom Nav -->
+    <!-- Bottom Nav (3 items) -->
     <nav class="bottom-nav">
       <a href="cliente-home.html" class="bottom-nav-item active">
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
         Inicio
-      </a>
-      <a href="cliente-home.html" class="bottom-nav-item">
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-        Revisar
       </a>
       <a href="cliente-pedidos.html" class="bottom-nav-item">
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
@@ -282,28 +294,85 @@
   </div>
 
   <script>
-    function simulatePhoto() {
-      const area = document.getElementById('uploadArea');
-      const placeholder = document.getElementById('uploadPlaceholder');
-      const preview = document.getElementById('photoPreview');
-      const result = document.getElementById('aiResult');
+    const reviews = {};
+    let reviewedCount = 0;
+    const totalReviewable = 2; // 3 conservadores - 1 en mantenimiento
 
-      // Simular que se tomo la foto
-      area.classList.add('has-photo');
-      placeholder.style.display = 'none';
-      preview.style.display = 'flex';
+    function simulatePhoto(id, level, label, priority) {
+      const upload = document.getElementById('upload' + id);
+      const result = document.getElementById('result' + id);
+      const card = document.getElementById('cons' + id);
 
-      // Mostrar resultado de IA despues de 800ms
+      // Show photo placeholder
+      upload.classList.add('has-photo');
+      upload.innerHTML = '<div class="photo-placeholder"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--color-muted)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M7 2v20"/><path d="M17 2v20"/><path d="M2 7h20"/><path d="M2 12h20"/><path d="M2 17h20"/></svg></div>';
+      upload.onclick = null;
+
+      // Show AI result after delay
       setTimeout(() => {
+        const colors = {
+          'empty': { bar: '#DC2626', width: '10%', badge: 'badge-priority-empty' },
+          'half-empty': { bar: '#F97316', width: '35%', badge: 'badge-priority-half-empty' },
+          'half-full': { bar: '#F59E0B', width: '65%', badge: 'badge-priority-half-full' },
+          'full': { bar: '#16A34A', width: '95%', badge: 'badge-priority-full' }
+        };
+        const c = colors[level];
+
+        result.innerHTML = `
+          <div class="level-bar-mini">
+            <div class="level-bar-mini-fill" style="width:${c.width};background:${c.bar};"></div>
+          </div>
+          <div class="ai-result-row">
+            <span class="text-sm" style="color:${c.bar};font-weight:600;">${label}</span>
+            <span class="badge ${c.badge}">${priority}</span>
+          </div>
+        `;
         result.classList.add('active');
-      }, 800);
+        card.classList.add('reviewed');
+
+        // Track review
+        reviews[id] = { label, priority, level };
+        reviewedCount++;
+        document.getElementById('reviewCount').textContent = reviewedCount + '/' + totalReviewable + ' revisados';
+
+        // Show summary and send button when all reviewed
+        if (reviewedCount >= totalReviewable) {
+          showSummary();
+        }
+      }, 600);
+    }
+
+    function showSummary() {
+      const summary = document.getElementById('reviewSummary');
+      const rows = document.getElementById('summaryRows');
+      const names = { 1: 'Conservador #1 (C150)', 2: 'Conservador #2 (C100)' };
+
+      let html = '';
+      for (const [id, data] of Object.entries(reviews)) {
+        const colors = {
+          'empty': '#DC2626', 'half-empty': '#F97316',
+          'half-full': '#F59E0B', 'full': '#16A34A'
+        };
+        html += `<div class="summary-row">
+          <span>${names[id]}</span>
+          <span style="color:${colors[data.level]};font-weight:600;">${data.label}</span>
+        </div>`;
+      }
+      html += `<div class="summary-row">
+        <span>Conservador #3 (C60)</span>
+        <span class="text-muted">Mantenimiento</span>
+      </div>`;
+
+      rows.innerHTML = html;
+      summary.classList.add('active');
+      document.getElementById('sendBtn').style.display = '';
     }
 
     function sendReview() {
-      const btn = event.target.closest('button');
+      const btn = document.getElementById('sendBtn');
       btn.innerHTML = `
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        Revision enviada
+        Revision enviada al gerente
       `;
       btn.style.background = 'var(--color-success)';
       btn.style.borderColor = 'var(--color-success)';
