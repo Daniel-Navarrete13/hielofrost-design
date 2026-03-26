@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HieloFrost — Mi Ruta</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="layout-mobile">
+    <div class="mobile-header">
+      <div class="flex justify-between items-center">
+        <div>
+          <p>Hola, Juan Pérez</p>
+          <h1>Mi Ruta del Día</h1>
+        </div>
+        <div style="text-align:right;">
+          <div class="text-sm" style="color:rgba(255,255,255,0.6);">25 Mar 2026</div>
+          <div class="badge badge-route" style="margin-top:4px;">En ruta</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mobile-body">
+      <!-- Summary -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:var(--space-sm);margin-bottom:var(--space-md);">
+        <div class="card" style="text-align:center;padding:var(--space-md);">
+          <div class="font-mono font-bold" style="font-size:1.25rem;color:var(--color-success);">2</div>
+          <div class="text-sm text-muted">Entregados</div>
+        </div>
+        <div class="card" style="text-align:center;padding:var(--space-md);">
+          <div class="font-mono font-bold" style="font-size:1.25rem;color:var(--color-cta);">1</div>
+          <div class="text-sm text-muted">En camino</div>
+        </div>
+        <div class="card" style="text-align:center;padding:var(--space-md);">
+          <div class="font-mono font-bold" style="font-size:1.25rem;color:var(--color-muted);">1</div>
+          <div class="text-sm text-muted">Pendiente</div>
+        </div>
+      </div>
+
+      <!-- Progress -->
+      <div class="flex justify-between text-sm mb-xs">
+        <span class="text-muted">Progreso</span>
+        <span class="font-mono font-bold">2 / 4 entregas</span>
+      </div>
+      <div style="background:var(--color-border);border-radius:999px;height:8px;margin-bottom:var(--space-lg);">
+        <div style="background:var(--color-success);border-radius:999px;height:8px;width:50%;transition:width 300ms ease;"></div>
+      </div>
+
+      <!-- Deliveries -->
+      <h3 class="mb-sm">Entregas</h3>
+
+      <!-- Delivered -->
+      <div class="card mb-sm" style="border-left:3px solid var(--color-success);opacity:0.7;">
+        <div class="flex justify-between items-center mb-xs">
+          <div class="flex items-center gap-sm">
+            <div style="width:28px;height:28px;background:#D1FAE5;border-radius:50%;display:flex;align-items:center;justify-content:center;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-success)" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <strong class="text-sm">1. OXXO Juárez</strong>
+          </div>
+          <span class="badge badge-delivered">Entregado</span>
+        </div>
+        <div class="text-sm text-muted" style="margin-left:36px;">
+          Av. Juárez #120 — 25 bolsas — 8:15 AM
+        </div>
+      </div>
+
+      <div class="card mb-sm" style="border-left:3px solid var(--color-success);opacity:0.7;">
+        <div class="flex justify-between items-center mb-xs">
+          <div class="flex items-center gap-sm">
+            <div style="width:28px;height:28px;background:#D1FAE5;border-radius:50%;display:flex;align-items:center;justify-content:center;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-success)" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <strong class="text-sm">2. Modelorama Centro</strong>
+          </div>
+          <span class="badge badge-delivered">Entregado</span>
+        </div>
+        <div class="text-sm text-muted" style="margin-left:36px;">
+          Calle Morelos #234 — 15 bolsas — 9:30 AM
+        </div>
+      </div>
+
+      <!-- Current -->
+      <a href="chofer-entrega.html" class="card card-clickable mb-sm" style="border-left:3px solid var(--color-cta);background:rgba(3,105,161,0.04);text-decoration:none;color:var(--color-text);">
+        <div class="flex justify-between items-center mb-xs">
+          <div class="flex items-center gap-sm">
+            <div style="width:28px;height:28px;background:#DBEAFE;border-radius:50%;display:flex;align-items:center;justify-content:center;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-cta)" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 7 8 11.7z"/></svg>
+            </div>
+            <strong class="text-sm">3. Extra Hidalgo</strong>
+          </div>
+          <span class="badge badge-route">En camino</span>
+        </div>
+        <div class="text-sm" style="margin-left:36px;">
+          <div>Av. Hidalgo #567 — <strong>20 bolsas</strong></div>
+          <div class="text-muted mt-xs">Toca para ver detalles y marcar entregado</div>
+        </div>
+        <div style="margin-left:36px;margin-top:8px;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-cta)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;"><polyline points="9 18 15 12 9 6"/></svg>
+          <span class="text-sm" style="color:var(--color-cta);font-weight:600;">Ver entrega</span>
+        </div>
+      </a>
+
+      <!-- Pending -->
+      <div class="card mb-sm" style="border-left:3px solid var(--color-border);">
+        <div class="flex justify-between items-center mb-xs">
+          <div class="flex items-center gap-sm">
+            <div style="width:28px;height:28px;background:var(--color-surface-alt);border-radius:50%;display:flex;align-items:center;justify-content:center;">
+              <span class="text-sm text-muted" style="font-weight:700;">4</span>
+            </div>
+            <strong class="text-sm">4. 7-Eleven Centro</strong>
+          </div>
+          <span class="badge badge-pending">Pendiente</span>
+        </div>
+        <div class="text-sm text-muted" style="margin-left:36px;">
+          Blvd. Centro #89 — 20 bolsas
+        </div>
+      </div>
+
+      <!-- Total -->
+      <div class="card mt-lg" style="background:var(--color-surface-alt);">
+        <div class="flex justify-between text-sm mb-xs">
+          <span class="text-muted">Total bolsas a entregar</span>
+          <span class="font-mono font-bold">80</span>
+        </div>
+        <div class="flex justify-between text-sm mb-xs">
+          <span class="text-muted">Bolsas entregadas</span>
+          <span class="font-mono font-bold text-success">40</span>
+        </div>
+        <div class="flex justify-between text-sm">
+          <span class="text-muted">Bolsas restantes</span>
+          <span class="font-mono font-bold">40</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Nav -->
+    <nav class="bottom-nav">
+      <a href="chofer-ruta.html" class="bottom-nav-item active">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 7 8 11.7z"/></svg>
+        Mi Ruta
+      </a>
+      <a href="#" class="bottom-nav-item">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        Historial
+      </a>
+      <a href="login.html" class="bottom-nav-item">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Salir
+      </a>
+    </nav>
+  </div>
+</body>
+</html>

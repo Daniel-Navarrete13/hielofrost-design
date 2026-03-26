@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HieloFrost — Pedidos</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="layout-sidebar">
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <h2>HieloFrost</h2>
+        <p style="color:rgba(255,255,255,0.4);font-size:0.75rem;margin-top:2px;">Panel Gerente</p>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="gerente-dashboard.html" class="sidebar-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+          Dashboard
+        </a>
+        <a href="gerente-pedidos.html" class="sidebar-link active">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
+          Pedidos
+        </a>
+        <a href="gerente-rutas.html" class="sidebar-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 7 8 11.7z"/></svg>
+          Rutas
+        </a>
+        <a href="gerente-tiendas.html" class="sidebar-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Tiendas
+        </a>
+        <a href="gerente-choferes.html" class="sidebar-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Choferes
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="sidebar-avatar">AG</div>
+          <div>
+            <div style="color:var(--color-white);font-weight:500;">Ana García</div>
+            <div style="font-size:0.6875rem;">Gerente General</div>
+          </div>
+        </div>
+        <a href="login.html" class="sidebar-link mt-md" style="padding-left:0;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          Cerrar sesión
+        </a>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <div class="page-header">
+        <h1>Gestión de Pedidos</h1>
+      </div>
+
+      <!-- Filters -->
+      <div class="filters-bar">
+        <button class="filter-chip active" onclick="filterOrders('all', this)">Todos (18)</button>
+        <button class="filter-chip" onclick="filterOrders('pending', this)">Pendientes (5)</button>
+        <button class="filter-chip" onclick="filterOrders('approved', this)">Aprobados (3)</button>
+        <button class="filter-chip" onclick="filterOrders('route', this)">En Ruta (5)</button>
+        <button class="filter-chip" onclick="filterOrders('delivered', this)">Entregados (5)</button>
+      </div>
+
+      <!-- Table -->
+      <div class="card">
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Pedido</th>
+                <th>Tienda</th>
+                <th>Tipo</th>
+                <th>Cantidad</th>
+                <th>Fecha Pedido</th>
+                <th>Fecha Entrega</th>
+                <th>Chofer</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="ordersTable">
+              <tr data-status="pending">
+                <td class="font-mono">#PV-0042</td>
+                <td>OXXO Centro</td>
+                <td class="text-sm">Conveniencia</td>
+                <td>20 bolsas</td>
+                <td>25 Mar</td>
+                <td>26 Mar</td>
+                <td class="text-muted">Sin asignar</td>
+                <td><span class="badge badge-pending">Pendiente</span></td>
+                <td>
+                  <div class="flex gap-xs">
+                    <button class="btn btn-primary btn-sm" onclick="openAssignModal(this)">Aprobar</button>
+                    <button class="btn btn-ghost btn-sm text-danger" onclick="rejectOrder(this)">Rechazar</button>
+                  </div>
+                </td>
+              </tr>
+              <tr data-status="pending">
+                <td class="font-mono">#PV-0041</td>
+                <td>7-Eleven Reforma</td>
+                <td class="text-sm">Conveniencia</td>
+                <td>15 bolsas</td>
+                <td>25 Mar</td>
+                <td>26 Mar</td>
+                <td class="text-muted">Sin asignar</td>
+                <td><span class="badge badge-pending">Pendiente</span></td>
+                <td>
+                  <div class="flex gap-xs">
+                    <button class="btn btn-primary btn-sm" onclick="openAssignModal(this)">Aprobar</button>
+                    <button class="btn btn-ghost btn-sm text-danger" onclick="rejectOrder(this)">Rechazar</button>
+                  </div>
+                </td>
+              </tr>
+              <tr data-status="pending">
+                <td class="font-mono">#PV-0040</td>
+                <td>Soriana Norte</td>
+                <td class="text-sm">Autoservicio</td>
+                <td>30 bolsas</td>
+                <td>25 Mar</td>
+                <td>26 Mar</td>
+                <td class="text-muted">Sin asignar</td>
+                <td><span class="badge badge-pending">Pendiente</span></td>
+                <td>
+                  <div class="flex gap-xs">
+                    <button class="btn btn-primary btn-sm" onclick="openAssignModal(this)">Aprobar</button>
+                    <button class="btn btn-ghost btn-sm text-danger" onclick="rejectOrder(this)">Rechazar</button>
+                  </div>
+                </td>
+              </tr>
+              <tr data-status="pending">
+                <td class="font-mono">#PV-0039</td>
+                <td>OXXO Poniente</td>
+                <td class="text-sm">Conveniencia</td>
+                <td>10 bolsas</td>
+                <td>24 Mar</td>
+                <td>27 Mar</td>
+                <td class="text-muted">Sin asignar</td>
+                <td><span class="badge badge-pending">Pendiente</span></td>
+                <td>
+                  <div class="flex gap-xs">
+                    <button class="btn btn-primary btn-sm" onclick="openAssignModal(this)">Aprobar</button>
+                    <button class="btn btn-ghost btn-sm text-danger" onclick="rejectOrder(this)">Rechazar</button>
+                  </div>
+                </td>
+              </tr>
+              <tr data-status="pending">
+                <td class="font-mono">#PV-0038</td>
+                <td>Extra Sur</td>
+                <td class="text-sm">Autoservicio</td>
+                <td>12 bolsas</td>
+                <td>24 Mar</td>
+                <td>27 Mar</td>
+                <td class="text-muted">Sin asignar</td>
+                <td><span class="badge badge-pending">Pendiente</span></td>
+                <td>
+                  <div class="flex gap-xs">
+                    <button class="btn btn-primary btn-sm" onclick="openAssignModal(this)">Aprobar</button>
+                    <button class="btn btn-ghost btn-sm text-danger" onclick="rejectOrder(this)">Rechazar</button>
+                  </div>
+                </td>
+              </tr>
+              <tr data-status="approved">
+                <td class="font-mono">#PV-0037</td>
+                <td>Modelorama Valle</td>
+                <td class="text-sm">Conveniencia</td>
+                <td>8 bolsas</td>
+                <td>24 Mar</td>
+                <td>25 Mar</td>
+                <td>Carlos Ruiz</td>
+                <td><span class="badge badge-approved">Aprobado</span></td>
+                <td><span class="text-sm text-muted">Listo para ruta</span></td>
+              </tr>
+              <tr data-status="approved">
+                <td class="font-mono">#PV-0036</td>
+                <td>Abarrotes El Sol</td>
+                <td class="text-sm">Conveniencia</td>
+                <td>5 bolsas</td>
+                <td>24 Mar</td>
+                <td>25 Mar</td>
+                <td>Carlos Ruiz</td>
+                <td><span class="badge badge-approved">Aprobado</span></td>
+                <td><span class="text-sm text-muted">Listo para ruta</span></td>
+              </tr>
+              <tr data-status="approved">
+                <td class="font-mono">#PV-0035</td>
+                <td>Super Kiosko</td>
+                <td class="text-sm">Conveniencia</td>
+                <td>10 bolsas</td>
+                <td>23 Mar</td>
+                <td>25 Mar</td>
+                <td>Juan Pérez</td>
+                <td><span class="badge badge-approved">Aprobado</span></td>
+                <td><span class="text-sm text-muted">Listo para ruta</span></td>
+              </tr>
+              <tr data-status="route">
+                <td class="font-mono">#PV-0034</td>
+                <td>OXXO Juárez</td>
+                <td class="text-sm">Conveniencia</td>
+                <td>25 bolsas</td>
+                <td>23 Mar</td>
+                <td>25 Mar</td>
+                <td>Juan Pérez</td>
+                <td><span class="badge badge-route">En Ruta</span></td>
+                <td><span class="text-sm text-muted">Zona Centro</span></td>
+              </tr>
+              <tr data-status="route">
+                <td class="font-mono">#PV-0033</td>
+                <td>Modelorama Centro</td>
+                <td class="text-sm">Conveniencia</td>
+                <td>15 bolsas</td>
+                <td>23 Mar</td>
+                <td>25 Mar</td>
+                <td>Juan Pérez</td>
+                <td><span class="badge badge-route">En Ruta</span></td>
+                <td><span class="text-sm text-muted">Zona Centro</span></td>
+              </tr>
+              <tr data-status="route">
+                <td class="font-mono">#PV-0032</td>
+                <td>Extra Hidalgo</td>
+                <td class="text-sm">Autoservicio</td>
+                <td>20 bolsas</td>
+                <td>23 Mar</td>
+                <td>25 Mar</td>
+                <td>Juan Pérez</td>
+                <td><span class="badge badge-route">En Ruta</span></td>
+                <td><span class="text-sm text-muted">Zona Centro</span></td>
+              </tr>
+              <tr data-status="route">
+                <td class="font-mono">#PV-0031</td>
+                <td>Soriana Norte</td>
+                <td class="text-sm">Autoservicio</td>
+                <td>30 bolsas</td>
+                <td>22 Mar</td>
+                <td>25 Mar</td>
+                <td>Miguel López</td>
+                <td><span class="badge badge-route">En Ruta</span></td>
+                <td><span class="text-sm text-muted">Zona Norte</span></td>
+              </tr>
+              <tr data-status="route">
+                <td class="font-mono">#PV-0030</td>
+                <td>OXXO Industrial</td>
+                <td class="text-sm">Conveniencia</td>
+                <td>18 bolsas</td>
+                <td>22 Mar</td>
+                <td>25 Mar</td>
+                <td>Miguel López</td>
+                <td><span class="badge badge-route">En Ruta</span></td>
+                <td><span class="text-sm text-muted">Zona Norte</span></td>
+              </tr>
+              <tr data-status="delivered">
+                <td class="font-mono">#PV-0029</td>
+                <td>7-Eleven Centro</td>
+                <td class="text-sm">Conveniencia</td>
+                <td>20 bolsas</td>
+                <td>22 Mar</td>
+                <td>25 Mar</td>
+                <td>Juan Pérez</td>
+                <td><span class="badge badge-delivered">Entregado</span></td>
+                <td><span class="text-sm text-success">Completado</span></td>
+              </tr>
+              <tr data-status="delivered">
+                <td class="font-mono">#PV-0028</td>
+                <td>OXXO Norte</td>
+                <td class="text-sm">Conveniencia</td>
+                <td>15 bolsas</td>
+                <td>21 Mar</td>
+                <td>24 Mar</td>
+                <td>Miguel López</td>
+                <td><span class="badge badge-delivered">Entregado</span></td>
+                <td><span class="text-sm text-success">Completado</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal Asignar Chofer -->
+  <div class="modal-overlay" id="assignModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Aprobar y Asignar Chofer</h2>
+        <button class="modal-close" onclick="closeModal()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <p class="text-sm text-muted mb-md" id="modalInfo"></p>
+      <div class="form-group">
+        <label class="form-label">Chofer asignado</label>
+        <select class="form-select">
+          <option value="" disabled selected>Selecciona un chofer</option>
+          <option>Juan Pérez — Zona Centro (4 entregas hoy)</option>
+          <option>Miguel López — Zona Norte (3 entregas hoy)</option>
+          <option>Carlos Ruiz — Zona Sur (1 entrega hoy)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Notas (opcional)</label>
+        <textarea class="form-textarea" placeholder="Instrucciones especiales para el chofer..."></textarea>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="closeModal()">Cancelar</button>
+        <button class="btn btn-primary" onclick="confirmApprove()">Aprobar y Asignar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentRow = null;
+
+    function filterOrders(status, chip) {
+      document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      document.querySelectorAll('#ordersTable tr').forEach(row => {
+        row.style.display = (status === 'all' || row.dataset.status === status) ? '' : 'none';
+      });
+    }
+
+    function openAssignModal(btn) {
+      currentRow = btn.closest('tr');
+      const cells = currentRow.querySelectorAll('td');
+      document.getElementById('modalInfo').textContent =
+        `${cells[0].textContent} — ${cells[1].textContent} — ${cells[3].textContent}`;
+      document.getElementById('assignModal').classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('assignModal').classList.remove('active');
+      currentRow = null;
+    }
+
+    function confirmApprove() {
+      if (currentRow) {
+        currentRow.dataset.status = 'approved';
+        currentRow.querySelector('.badge').className = 'badge badge-approved';
+        currentRow.querySelector('.badge').textContent = 'Aprobado';
+        currentRow.querySelectorAll('td')[6].textContent = 'Carlos Ruiz';
+        currentRow.querySelector('td:last-child').innerHTML = '<span class="text-sm text-muted">Listo para ruta</span>';
+      }
+      closeModal();
+    }
+
+    function rejectOrder(btn) {
+      const row = btn.closest('tr');
+      row.dataset.status = 'rejected';
+      row.querySelector('.badge').className = 'badge badge-rejected';
+      row.querySelector('.badge').textContent = 'Rechazado';
+      row.querySelector('td:last-child').innerHTML = '<span class="text-sm text-danger">Rechazado</span>';
+    }
+  </script>
+</body>
+</html>

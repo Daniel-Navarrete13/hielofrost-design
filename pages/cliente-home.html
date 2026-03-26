@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HieloFrost — Cliente</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body { background: var(--color-background); }
+  </style>
+</head>
+<body>
+  <div class="layout-mobile">
+    <!-- Header -->
+    <div class="mobile-header">
+      <p>Bienvenido</p>
+      <h1>OXXO Centro</h1>
+    </div>
+
+    <!-- Body -->
+    <div class="mobile-body">
+
+      <!-- Quick Action -->
+      <a href="cliente-pedido.html" class="card card-clickable mb-md" style="display:flex;align-items:center;gap:var(--space-md);background:var(--color-cta);color:white;border:none;">
+        <div style="width:48px;height:48px;background:rgba(255,255,255,0.2);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+        <div>
+          <strong style="font-size:1rem;">Nuevo Pedido</strong>
+          <p style="font-size:0.8125rem;opacity:0.8;">Bolsa de Hielo 5kg</p>
+        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto;"><polyline points="9 18 15 12 9 6"/></svg>
+      </a>
+
+      <!-- Active Orders -->
+      <h3 class="mb-sm">Pedidos Activos</h3>
+
+      <div class="card mb-sm" style="border-left:3px solid var(--color-cta);">
+        <div class="flex justify-between items-center mb-xs">
+          <span class="font-mono text-sm" style="font-weight:600;">#PV-0042</span>
+          <span class="badge badge-pending">Pendiente</span>
+        </div>
+        <div class="flex justify-between text-sm">
+          <span>20 bolsas de 5kg</span>
+          <span class="text-muted">Entrega: 26 Mar</span>
+        </div>
+      </div>
+
+      <div class="card mb-sm" style="border-left:3px solid var(--color-success);">
+        <div class="flex justify-between items-center mb-xs">
+          <span class="font-mono text-sm" style="font-weight:600;">#PV-0034</span>
+          <span class="badge badge-route">En Ruta</span>
+        </div>
+        <div class="flex justify-between text-sm">
+          <span>25 bolsas de 5kg</span>
+          <span class="text-muted">Chofer: Juan Pérez</span>
+        </div>
+        <div class="text-sm text-muted mt-sm">Estimado: hoy antes de las 12:00 PM</div>
+      </div>
+
+      <!-- Recent -->
+      <div class="flex justify-between items-center mt-lg mb-sm">
+        <h3>Últimos Pedidos</h3>
+        <a href="cliente-pedidos.html" class="text-sm">Ver todos</a>
+      </div>
+
+      <div class="card mb-sm" style="opacity:0.7;">
+        <div class="flex justify-between items-center mb-xs">
+          <span class="font-mono text-sm" style="font-weight:600;">#PV-0029</span>
+          <span class="badge badge-delivered">Entregado</span>
+        </div>
+        <div class="flex justify-between text-sm">
+          <span>20 bolsas de 5kg</span>
+          <span class="text-muted">22 Mar 2026</span>
+        </div>
+      </div>
+
+      <div class="card mb-sm" style="opacity:0.7;">
+        <div class="flex justify-between items-center mb-xs">
+          <span class="font-mono text-sm" style="font-weight:600;">#PV-0021</span>
+          <span class="badge badge-delivered">Entregado</span>
+        </div>
+        <div class="flex justify-between text-sm">
+          <span>15 bolsas de 5kg</span>
+          <span class="text-muted">18 Mar 2026</span>
+        </div>
+      </div>
+
+      <!-- Store Info Card -->
+      <a href="cliente-tienda.html" class="card card-clickable mt-lg" style="display:flex;align-items:center;gap:var(--space-md);text-decoration:none;color:var(--color-text);">
+        <div style="width:40px;height:40px;background:var(--color-surface-alt);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-secondary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div style="flex:1;">
+          <strong class="text-sm">Mi Tienda</strong>
+          <p class="text-sm text-muted">3 refrigeradores asignados</p>
+        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </a>
+    </div>
+
+    <!-- Bottom Nav -->
+    <nav class="bottom-nav">
+      <a href="cliente-home.html" class="bottom-nav-item active">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Inicio
+      </a>
+      <a href="cliente-pedido.html" class="bottom-nav-item">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Pedir
+      </a>
+      <a href="cliente-pedidos.html" class="bottom-nav-item">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
+        Pedidos
+      </a>
+      <a href="cliente-tienda.html" class="bottom-nav-item">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        Mi Tienda
+      </a>
+    </nav>
+  </div>
+</body>
+</html>

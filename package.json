@@ -1,0 +1,12 @@
+{
+  "name": "hielofrost-design-system",
+  "version": "1.0.0",
+  "description": "HieloFrost Design System - Preview local con hot-reload",
+  "scripts": {
+    "start": "live-server pages/ --port=8080 --open=/index.html",
+    "preview": "live-server pages/ --port=8080 --no-browser"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}

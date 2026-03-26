@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HieloFrost — Tiendas</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="layout-sidebar">
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <h2>HieloFrost</h2>
+        <p style="color:rgba(255,255,255,0.4);font-size:0.75rem;margin-top:2px;">Panel Gerente</p>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="gerente-dashboard.html" class="sidebar-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+          Dashboard
+        </a>
+        <a href="gerente-pedidos.html" class="sidebar-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
+          Pedidos
+        </a>
+        <a href="gerente-rutas.html" class="sidebar-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 7 8 11.7z"/></svg>
+          Rutas
+        </a>
+        <a href="gerente-tiendas.html" class="sidebar-link active">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Tiendas
+        </a>
+        <a href="gerente-choferes.html" class="sidebar-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Choferes
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="sidebar-avatar">AG</div>
+          <div>
+            <div style="color:var(--color-white);font-weight:500;">Ana García</div>
+            <div style="font-size:0.6875rem;">Gerente General</div>
+          </div>
+        </div>
+        <a href="login.html" class="sidebar-link mt-md" style="padding-left:0;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          Cerrar sesión
+        </a>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <div class="page-header">
+        <h1>Registro de Tiendas</h1>
+        <button class="btn btn-primary" onclick="document.getElementById('addStoreModal').classList.add('active')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Nueva Tienda
+        </button>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label">Total Tiendas</div>
+          <div class="stat-value">12</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Autoservicio</div>
+          <div class="stat-value">4</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Conveniencia</div>
+          <div class="stat-value">8</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Total Refrigeradores</div>
+          <div class="stat-value">34</div>
+        </div>
+      </div>
+
+      <!-- Filters -->
+      <div class="filters-bar">
+        <button class="filter-chip active" onclick="filterStores('all', this)">Todas</button>
+        <button class="filter-chip" onclick="filterStores('autoservicio', this)">Autoservicio</button>
+        <button class="filter-chip" onclick="filterStores('conveniencia', this)">Conveniencia</button>
+        <button class="filter-chip" onclick="filterStores('active', this)">Activas</button>
+        <button class="filter-chip" onclick="filterStores('inactive', this)">Inactivas</button>
+      </div>
+
+      <!-- Table -->
+      <div class="card">
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Tienda</th>
+                <th>Tipo</th>
+                <th>Dirección</th>
+                <th>Zona</th>
+                <th>Refrigeradores</th>
+                <th>Estatus</th>
+                <th>Último Pedido</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="storesTable">
+              <tr data-type="conveniencia" data-status="active">
+                <td><strong>OXXO Centro</strong><br><span class="text-sm text-muted">Contacto: Luis Martínez</span></td>
+                <td><span class="badge badge-approved">Conveniencia</span></td>
+                <td class="text-sm">Av. Juárez #120, Col. Centro</td>
+                <td>Centro</td>
+                <td class="font-mono" style="font-size:1.125rem;font-weight:700;">3</td>
+                <td><span class="badge badge-active">Activa</span></td>
+                <td class="text-sm">25 Mar 2026</td>
+                <td>
+                  <button class="btn btn-ghost btn-sm" onclick="openEditModal('OXXO Centro', 'conveniencia', 'Av. Juárez #120, Col. Centro', 'Centro', 3)">Editar</button>
+                </td>
+              </tr>
+              <tr data-type="conveniencia" data-status="active">
+                <td><strong>7-Eleven Reforma</strong><br><span class="text-sm text-muted">Contacto: María López</span></td>
+                <td><span class="badge badge-approved">Conveniencia</span></td>
+                <td class="text-sm">Blvd. Reforma #456</td>
+                <td>Centro</td>
+                <td class="font-mono" style="font-size:1.125rem;font-weight:700;">2</td>
+                <td><span class="badge badge-active">Activa</span></td>
+                <td class="text-sm">25 Mar 2026</td>
+                <td>
+                  <button class="btn btn-ghost btn-sm" onclick="openEditModal('7-Eleven Reforma', 'conveniencia', 'Blvd. Reforma #456', 'Centro', 2)">Editar</button>
+                </td>
+              </tr>
+              <tr data-type="autoservicio" data-status="active">
+                <td><strong>Soriana Norte</strong><br><span class="text-sm text-muted">Contacto: Pedro Sánchez</span></td>
+                <td><span class="badge badge-route">Autoservicio</span></td>
+                <td class="text-sm">Av. Industrial #890, Zona Norte</td>
+                <td>Norte</td>
+                <td class="font-mono" style="font-size:1.125rem;font-weight:700;">4</td>
+                <td><span class="badge badge-active">Activa</span></td>
+                <td class="text-sm">24 Mar 2026</td>
+                <td>
+                  <button class="btn btn-ghost btn-sm" onclick="openEditModal('Soriana Norte', 'autoservicio', 'Av. Industrial #890, Zona Norte', 'Norte', 4)">Editar</button>
+                </td>
+              </tr>
+              <tr data-type="conveniencia" data-status="active">
+                <td><strong>OXXO Poniente</strong><br><span class="text-sm text-muted">Contacto: Rosa García</span></td>
+                <td><span class="badge badge-approved">Conveniencia</span></td>
+                <td class="text-sm">Calle 5 de Mayo #78</td>
+                <td>Poniente</td>
+                <td class="font-mono" style="font-size:1.125rem;font-weight:700;">2</td>
+                <td><span class="badge badge-active">Activa</span></td>
+                <td class="text-sm">24 Mar 2026</td>
+                <td>
+                  <button class="btn btn-ghost btn-sm" onclick="openEditModal('OXXO Poniente', 'conveniencia', 'Calle 5 de Mayo #78', 'Poniente', 2)">Editar</button>
+                </td>
+              </tr>
+              <tr data-type="autoservicio" data-status="active">
+                <td><strong>Extra Sur</strong><br><span class="text-sm text-muted">Contacto: Jorge Díaz</span></td>
+                <td><span class="badge badge-route">Autoservicio</span></td>
+                <td class="text-sm">Av. Las Torres #345, Zona Sur</td>
+                <td>Sur</td>
+                <td class="font-mono" style="font-size:1.125rem;font-weight:700;">3</td>
+                <td><span class="badge badge-active">Activa</span></td>
+                <td class="text-sm">24 Mar 2026</td>
+                <td>
+                  <button class="btn btn-ghost btn-sm" onclick="openEditModal('Extra Sur', 'autoservicio', 'Av. Las Torres #345, Zona Sur', 'Sur', 3)">Editar</button>
+                </td>
+              </tr>
+              <tr data-type="conveniencia" data-status="active">
+                <td><strong>Modelorama Centro</strong><br><span class="text-sm text-muted">Contacto: Alfredo Ruiz</span></td>
+                <td><span class="badge badge-approved">Conveniencia</span></td>
+                <td class="text-sm">Calle Morelos #234</td>
+                <td>Centro</td>
+                <td class="font-mono" style="font-size:1.125rem;font-weight:700;">2</td>
+                <td><span class="badge badge-active">Activa</span></td>
+                <td class="text-sm">23 Mar 2026</td>
+                <td>
+                  <button class="btn btn-ghost btn-sm" onclick="openEditModal('Modelorama Centro', 'conveniencia', 'Calle Morelos #234', 'Centro', 2)">Editar</button>
+                </td>
+              </tr>
+              <tr data-type="conveniencia" data-status="inactive">
+                <td><strong>OXXO Industrial</strong><br><span class="text-sm text-muted">Contacto: Carlos Vega</span></td>
+                <td><span class="badge badge-approved">Conveniencia</span></td>
+                <td class="text-sm">Parque Industrial #12</td>
+                <td>Norte</td>
+                <td class="font-mono" style="font-size:1.125rem;font-weight:700;">2</td>
+                <td><span class="badge badge-inactive">Inactiva</span></td>
+                <td class="text-sm">15 Mar 2026</td>
+                <td>
+                  <button class="btn btn-ghost btn-sm" onclick="openEditModal('OXXO Industrial', 'conveniencia', 'Parque Industrial #12', 'Norte', 2)">Editar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal Editar Tienda -->
+  <div class="modal-overlay" id="editStoreModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="editModalTitle">Editar Tienda</h2>
+        <button class="modal-close" onclick="closeEditModal()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Nombre de la tienda</label>
+        <input type="text" class="form-input" id="editName">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Tipo</label>
+        <select class="form-select" id="editType">
+          <option value="conveniencia">Conveniencia</option>
+          <option value="autoservicio">Autoservicio</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Dirección</label>
+        <input type="text" class="form-input" id="editAddress">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Zona</label>
+        <select class="form-select" id="editZone">
+          <option value="Centro">Centro</option>
+          <option value="Norte">Norte</option>
+          <option value="Sur">Sur</option>
+          <option value="Poniente">Poniente</option>
+          <option value="Oriente">Oriente</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Cantidad de Refrigeradores</label>
+        <input type="number" class="form-input" id="editRefris" min="0" max="20">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Contacto</label>
+        <input type="text" class="form-input" placeholder="Nombre del encargado">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Teléfono</label>
+        <input type="tel" class="form-input" placeholder="(000) 000-0000">
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="closeEditModal()">Cancelar</button>
+        <button class="btn btn-primary" onclick="closeEditModal()">Guardar Cambios</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Nueva Tienda -->
+  <div class="modal-overlay" id="addStoreModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Nueva Tienda</h2>
+        <button class="modal-close" onclick="document.getElementById('addStoreModal').classList.remove('active')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Nombre de la tienda</label>
+        <input type="text" class="form-input" placeholder="Ej: OXXO Reforma">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Tipo</label>
+        <select class="form-select">
+          <option value="" disabled selected>Selecciona tipo</option>
+          <option>Conveniencia</option>
+          <option>Autoservicio</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Dirección</label>
+        <input type="text" class="form-input" placeholder="Calle y número">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Zona</label>
+        <select class="form-select">
+          <option value="" disabled selected>Selecciona zona</option>
+          <option>Centro</option>
+          <option>Norte</option>
+          <option>Sur</option>
+          <option>Poniente</option>
+          <option>Oriente</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Cantidad de Refrigeradores</label>
+        <input type="number" class="form-input" placeholder="0" min="0">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Nombre del contacto</label>
+        <input type="text" class="form-input" placeholder="Nombre del encargado">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Teléfono</label>
+        <input type="tel" class="form-input" placeholder="(000) 000-0000">
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="document.getElementById('addStoreModal').classList.remove('active')">Cancelar</button>
+        <button class="btn btn-primary" onclick="document.getElementById('addStoreModal').classList.remove('active')">Agregar Tienda</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function filterStores(filter, chip) {
+      document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      document.querySelectorAll('#storesTable tr').forEach(row => {
+        if (filter === 'all') { row.style.display = ''; return; }
+        if (filter === 'active' || filter === 'inactive') {
+          row.style.display = row.dataset.status === filter ? '' : 'none';
+        } else {
+          row.style.display = row.dataset.type === filter ? '' : 'none';
+        }
+      });
+    }
+
+    function openEditModal(name, type, address, zone, refris) {
+      document.getElementById('editModalTitle').textContent = `Editar — ${name}`;
+      document.getElementById('editName').value = name;
+      document.getElementById('editType').value = type;
+      document.getElementById('editAddress').value = address;
+      document.getElementById('editZone').value = zone;
+      document.getElementById('editRefris').value = refris;
+      document.getElementById('editStoreModal').classList.add('active');
+    }
+
+    function closeEditModal() {
+      document.getElementById('editStoreModal').classList.remove('active');
+    }
+  </script>
+</body>
+</html>

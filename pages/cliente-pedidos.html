@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HieloFrost — Mis Pedidos</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="layout-mobile">
+    <div class="mobile-header">
+      <h1>Mis Pedidos</h1>
+      <p>OXXO Centro</p>
+    </div>
+
+    <div class="mobile-body">
+      <!-- Filters -->
+      <div class="filters-bar mb-md">
+        <button class="filter-chip active" onclick="filterMobile('all', this)">Todos</button>
+        <button class="filter-chip" onclick="filterMobile('pending', this)">Pendientes</button>
+        <button class="filter-chip" onclick="filterMobile('route', this)">En Ruta</button>
+        <button class="filter-chip" onclick="filterMobile('delivered', this)">Entregados</button>
+      </div>
+
+      <!-- Orders List -->
+      <div id="ordersList">
+        <div class="card mb-sm" data-status="pending" style="border-left:3px solid var(--color-warning);">
+          <div class="flex justify-between items-center mb-xs">
+            <span class="font-mono text-sm" style="font-weight:600;">#PV-0042</span>
+            <span class="badge badge-pending">Pendiente</span>
+          </div>
+          <div class="flex justify-between text-sm mb-xs">
+            <span>20 bolsas de 5kg</span>
+            <span class="text-muted">100 kg</span>
+          </div>
+          <div class="text-sm text-muted">Pedido: 25 Mar — Entrega: 26 Mar</div>
+        </div>
+
+        <div class="card mb-sm" data-status="route" style="border-left:3px solid var(--color-cta);">
+          <div class="flex justify-between items-center mb-xs">
+            <span class="font-mono text-sm" style="font-weight:600;">#PV-0034</span>
+            <span class="badge badge-route">En Ruta</span>
+          </div>
+          <div class="flex justify-between text-sm mb-xs">
+            <span>25 bolsas de 5kg</span>
+            <span class="text-muted">125 kg</span>
+          </div>
+          <div class="text-sm text-muted">Chofer: Juan Pérez — Hoy antes de 12:00 PM</div>
+        </div>
+
+        <div class="card mb-sm" data-status="delivered" style="border-left:3px solid var(--color-success);opacity:0.75;">
+          <div class="flex justify-between items-center mb-xs">
+            <span class="font-mono text-sm" style="font-weight:600;">#PV-0029</span>
+            <span class="badge badge-delivered">Entregado</span>
+          </div>
+          <div class="flex justify-between text-sm mb-xs">
+            <span>20 bolsas de 5kg</span>
+            <span class="text-muted">100 kg</span>
+          </div>
+          <div class="text-sm text-muted">Entregado: 22 Mar — Chofer: Juan Pérez</div>
+        </div>
+
+        <div class="card mb-sm" data-status="delivered" style="border-left:3px solid var(--color-success);opacity:0.75;">
+          <div class="flex justify-between items-center mb-xs">
+            <span class="font-mono text-sm" style="font-weight:600;">#PV-0021</span>
+            <span class="badge badge-delivered">Entregado</span>
+          </div>
+          <div class="flex justify-between text-sm mb-xs">
+            <span>15 bolsas de 5kg</span>
+            <span class="text-muted">75 kg</span>
+          </div>
+          <div class="text-sm text-muted">Entregado: 18 Mar — Chofer: Miguel López</div>
+        </div>
+
+        <div class="card mb-sm" data-status="delivered" style="border-left:3px solid var(--color-success);opacity:0.75;">
+          <div class="flex justify-between items-center mb-xs">
+            <span class="font-mono text-sm" style="font-weight:600;">#PV-0015</span>
+            <span class="badge badge-delivered">Entregado</span>
+          </div>
+          <div class="flex justify-between text-sm mb-xs">
+            <span>20 bolsas de 5kg</span>
+            <span class="text-muted">100 kg</span>
+          </div>
+          <div class="text-sm text-muted">Entregado: 14 Mar — Chofer: Carlos Ruiz</div>
+        </div>
+
+        <div class="card mb-sm" data-status="rejected" style="border-left:3px solid var(--color-danger);opacity:0.6;">
+          <div class="flex justify-between items-center mb-xs">
+            <span class="font-mono text-sm" style="font-weight:600;">#PV-0012</span>
+            <span class="badge badge-rejected">Rechazado</span>
+          </div>
+          <div class="flex justify-between text-sm mb-xs">
+            <span>50 bolsas de 5kg</span>
+            <span class="text-muted">250 kg</span>
+          </div>
+          <div class="text-sm text-muted">Pedido: 10 Mar — Motivo: Stock insuficiente</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Nav -->
+    <nav class="bottom-nav">
+      <a href="cliente-home.html" class="bottom-nav-item">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Inicio
+      </a>
+      <a href="cliente-pedido.html" class="bottom-nav-item">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Pedir
+      </a>
+      <a href="cliente-pedidos.html" class="bottom-nav-item active">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
+        Pedidos
+      </a>
+      <a href="cliente-tienda.html" class="bottom-nav-item">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        Mi Tienda
+      </a>
+    </nav>
+  </div>
+
+  <script>
+    function filterMobile(status, chip) {
+      document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      document.querySelectorAll('#ordersList .card').forEach(card => {
+        card.style.display = (status === 'all' || card.dataset.status === status) ? '' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>

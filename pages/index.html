@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HieloFrost — Design System</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .index-container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: var(--space-2xl) var(--space-lg);
+      min-height: 100vh;
+    }
+
+    .index-header {
+      text-align: center;
+      margin-bottom: var(--space-3xl);
+    }
+
+    .index-header h1 {
+      font-family: 'Fira Code', monospace;
+      font-size: 2rem;
+      color: var(--color-primary);
+      margin-bottom: var(--space-sm);
+    }
+
+    .index-header p {
+      color: var(--color-muted);
+      font-size: 1rem;
+    }
+
+    .role-section {
+      margin-bottom: var(--space-2xl);
+    }
+
+    .role-section h2 {
+      font-family: 'Fira Code', monospace;
+      font-size: 1.1rem;
+      color: var(--color-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: var(--space-md);
+      padding-bottom: var(--space-sm);
+      border-bottom: 2px solid var(--color-border);
+    }
+
+    .pages-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: var(--space-md);
+    }
+
+    .page-card {
+      display: block;
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      text-decoration: none;
+      color: inherit;
+      transition: all 200ms ease;
+      cursor: pointer;
+    }
+
+    .page-card:hover {
+      border-color: var(--color-cta);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .page-card h3 {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.95rem;
+      color: var(--color-primary);
+      margin-bottom: var(--space-xs);
+    }
+
+    .page-card p {
+      font-size: 0.85rem;
+      color: var(--color-muted);
+      line-height: 1.4;
+    }
+
+    .page-card .tag {
+      display: inline-block;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.7rem;
+      color: var(--color-cta);
+      background: rgba(3, 105, 161, 0.08);
+      padding: 2px 8px;
+      border-radius: var(--radius-sm);
+      margin-top: var(--space-sm);
+    }
+
+    .index-footer {
+      text-align: center;
+      padding: var(--space-2xl) 0 var(--space-lg);
+      color: var(--color-muted);
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body style="background: var(--color-background);">
+
+  <div class="index-container">
+
+    <div class="index-header">
+      <h1>HieloFrost</h1>
+      <p>Design System — 13 vistas / 3 roles</p>
+    </div>
+
+    <!-- Login -->
+    <div class="role-section">
+      <h2>Acceso</h2>
+      <div class="pages-grid">
+        <a href="login.html" class="page-card">
+          <h3>Login</h3>
+          <p>Inicio de sesion multi-rol con selector de Gerente, Cliente o Chofer.</p>
+          <span class="tag">login.html</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Gerente -->
+    <div class="role-section">
+      <h2>Gerente</h2>
+      <div class="pages-grid">
+        <a href="gerente-dashboard.html" class="page-card">
+          <h3>Dashboard</h3>
+          <p>Panel principal con estadisticas de pedidos, rutas y entregas del dia.</p>
+          <span class="tag">gerente-dashboard.html</span>
+        </a>
+        <a href="gerente-pedidos.html" class="page-card">
+          <h3>Pedidos</h3>
+          <p>Tabla de gestion de pedidos con filtros por estado y acciones rapidas.</p>
+          <span class="tag">gerente-pedidos.html</span>
+        </a>
+        <a href="gerente-rutas.html" class="page-card">
+          <h3>Rutas</h3>
+          <p>Vista de rutas de entrega, asignacion de choferes y progreso.</p>
+          <span class="tag">gerente-rutas.html</span>
+        </a>
+        <a href="gerente-tiendas.html" class="page-card">
+          <h3>Tiendas</h3>
+          <p>Directorio de tiendas clientes con refrigeradores asignados.</p>
+          <span class="tag">gerente-tiendas.html</span>
+        </a>
+        <a href="gerente-choferes.html" class="page-card">
+          <h3>Choferes</h3>
+          <p>Gestion de choferes, disponibilidad y asignacion de rutas.</p>
+          <span class="tag">gerente-choferes.html</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Cliente -->
+    <div class="role-section">
+      <h2>Cliente (Tienda)</h2>
+      <div class="pages-grid">
+        <a href="cliente-home.html" class="page-card">
+          <h3>Home</h3>
+          <p>Dashboard del cliente con pedidos activos y accion rapida de nuevo pedido.</p>
+          <span class="tag">cliente-home.html</span>
+        </a>
+        <a href="cliente-pedido.html" class="page-card">
+          <h3>Nuevo Pedido</h3>
+          <p>Formulario de creacion de pedido con seleccion de productos.</p>
+          <span class="tag">cliente-pedido.html</span>
+        </a>
+        <a href="cliente-pedidos.html" class="page-card">
+          <h3>Mis Pedidos</h3>
+          <p>Historial de pedidos con tracking de estado.</p>
+          <span class="tag">cliente-pedidos.html</span>
+        </a>
+        <a href="cliente-tienda.html" class="page-card">
+          <h3>Mi Tienda</h3>
+          <p>Perfil de la tienda y refrigeradores asignados.</p>
+          <span class="tag">cliente-tienda.html</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Chofer -->
+    <div class="role-section">
+      <h2>Chofer</h2>
+      <div class="pages-grid">
+        <a href="chofer-ruta.html" class="page-card">
+          <h3>Mi Ruta</h3>
+          <p>Ruta del dia con progreso de entregas y lista de paradas.</p>
+          <span class="tag">chofer-ruta.html</span>
+        </a>
+        <a href="chofer-entrega.html" class="page-card">
+          <h3>Entrega</h3>
+          <p>Detalle de entrega individual con confirmacion y evidencia.</p>
+          <span class="tag">chofer-entrega.html</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="index-footer">
+      HieloFrost Design System v1.0 — html.to.design ready
+    </div>
+
+  </div>
+
+</body>
+</html>
